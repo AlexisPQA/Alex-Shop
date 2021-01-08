@@ -15,6 +15,8 @@ mongoose.connect(process.env.url, {useNewUrlParser: true, useUnifiedTopology: tr
 
 
 var indexRouter = require('./routes/index');
+var productRouter = require('./routes/product')
+
 
 var app = express();
 
@@ -42,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/index', indexRouter);
-
+app.use('/products',productRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
