@@ -11,7 +11,7 @@
   
 
   <!-- Custom StyleSheet -->
-  <link rel="stylesheet" href="stylesheets/styles.css" />
+  <link rel="stylesheet" href="../stylesheets/styles.css" />
   <title>Codevo - Ecommerce Website</title>
 </head>
 
@@ -26,8 +26,8 @@
         <div class="top">
           <label for="" class="btn close-btn"><i class="fas fa-times"></i></label>
         </div>
-        <li><a href="index">Home</a></li>
-        <li><a href="products">Products</a></li>
+        <li><a href="/index">Home</a></li>
+        <li><a href="/products">Products</a></li>
         <li>
           <a href="" class="desktop-item">Shop <span><i class="fas fa-chevron-down"></i></span></a>
           <input type="checkbox" id="showMega" />
@@ -113,37 +113,15 @@
           </div>
 
           <ul class="block-content">
+            {{#each category}}
             <li>
               <input type="checkbox" name="" id="">
               <label for="">
-                <span>Shoes</span>
+                <span>{{name}}</span>
                 <small>(10)</small>
               </label>
             </li>
-
-            <li>
-              <input type="checkbox" name="" id="">
-              <label for="">
-                <span>Bags</span>
-                <small>(7)</small>
-              </label>
-            </li>
-
-            <li>
-              <input type="checkbox" name="" id="">
-              <label for="">
-                <span> Accessories</span>
-                <small>(3)</small>
-              </label>
-            </li>
-
-            <li>
-              <input type="checkbox" name="" id="">
-              <label for="">
-                <span>Clothings</span>
-                <small>(3)</small>
-              </label>
-            </li>
+            {{/each}}
           </ul>
         </div>
 
@@ -267,21 +245,21 @@
 
         <!-- PAGINATION -->
         <ul class="pagination">
-          <span class="last"><a href="/product/book?page=1">First « </a></span>
+          <span class="last"><a href="/products/book?page=1">First « </a></span>
           {{#isnt currentPage 1}}
-          <span class="icon"><a href="/product/book?page={{prevPage}}">«</a></span>
+          <span class="icon"><a href="/products/book?page={{prevPage}}">«</a></span>
           {{/isnt}}
           {{#if hasPreviousPage}}
-          <span><a href="/product/book?page={{prevPage}}">{{prevPage}}</a></span>
+          <span><a href="/products/book?page={{prevPage}}">{{prevPage}}</a></span>
           {{/if}}
-          <span class ="active"><a href="/product/book?page={{currentPage}}">{{currentPage}}</a></span>
+          <span class ="active"><a href="/products/book?page={{currentPage}}">{{currentPage}}</a></span>
           {{#if hasNextPage}}
-          <span><a href="/product/book?page={{nextPage}}">{{nextPage}}</a></span>
+          <span><a href="/products/book?page={{nextPage}}">{{nextPage}}</a></span>
           {{/if}}
           {{#gt lastPage currentPage}}
-          <span class="icon"><a href="/product/book?page={{nextPage}}">»</a></span>
+          <span class="icon"><a href="/products/book?page={{nextPage}}">»</a></span>
           {{/gt}}
-          <span class="last"><a href="/product/book?page={{lastPage}}">Last »</a></span>
+          <span class="last"><a href="/products/book?page={{lastPage}}">Last »</a></span>
         </ul>
       </div>
     </div>
