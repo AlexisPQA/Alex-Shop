@@ -256,7 +256,7 @@
               </ul>
             </div>
             <div class="bottom">
-              <a href=/book/{{id}}>{{title}}</a>
+              <a href=/products/book/{{id}}>{{title}}</a>
               <div class="price">
                 <span>{{basePrice}}</span>
               </div>
@@ -267,17 +267,21 @@
 
         <!-- PAGINATION -->
         <ul class="pagination">
-          <span class="last">First « </span>
+          <span class="last"><a href="/product/book?page=1">First « </a></span>
           {{#isnt currentPage 1}}
           <span class="icon"><a href="/product/book?page={{prevPage}}">«</a></span>
           {{/isnt}}
           {{#if hasPreviousPage}}
           <span><a href="/product/book?page={{prevPage}}">{{prevPage}}</a></span>
           {{/if}}
-          <span class ="active"><a href="/product/book?page={{prevPage}}">1</a></span>
-          <span>2</span>
-          <span class="icon">»</span>
-          <span class="last">Last »</span>
+          <span class ="active"><a href="/product/book?page={{currentPage}}">{{currentPage}}</a></span>
+          {{#if hasNextPage}}
+          <span><a href="/product/book?page={{nextPage}}">{{nextPage}}</a></span>
+          {{/if}}
+          {{#gt lastPage currentPage}}
+          <span class="icon"><a href="/product/book?page={{nextPage}}">»</a></span>
+          {{/gt}}
+          <span class="last"><a href="/product/book?page={{lastPage}}">Last »</a></span>
         </ul>
       </div>
     </div>
