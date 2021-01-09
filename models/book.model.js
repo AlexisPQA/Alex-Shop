@@ -6,7 +6,8 @@ var bookSchema = new moongse.Schema({
     detail: String,
     basePrice: String,
     category:String,
-    author:String
+    author:String,
+    views : Number,
 });
 
 bookSchema.plugin(mongoosePaginate)
