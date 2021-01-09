@@ -1302,6 +1302,12 @@ th:last-child {
   cursor: pointer;
 }
 
+.pagination span.active {
+  border: 1px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--white);
+}
+
 .pagination span.last {
   width: 7rem;
   border-radius: 3rem;
