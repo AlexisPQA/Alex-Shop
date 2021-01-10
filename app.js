@@ -6,19 +6,51 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
+const flash = require('connect-flash');
 var hbs = require('express-handlebars')
+var session = require('express-session');
+const passport = require('passport');
+var MongoStore = require('connect-mongo')(session);
+var bodyParser = require('body-parser');
 const hbshelper = require('handlebars-helpers')
 const multihelpers = hbshelper()
 
-mongoose.connect(process.env.url, {useNewUrlParser: true, useUnifiedTopology: true})
 
+mongoose.connect(process.env.url, {useNewUrlParser: true, useUnifiedTopology: true})
+var db = mongoose.connection;
+
+require('./config/passport')(passport);
+
+//handle mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // we're connected!
+});
 
 
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product')
-
+var loginRouter = require('./routes/login')
 
 var app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(session({
+	secret: 'work hard',
+	resave: true,
+	saveUninitialized: false,
+	store: new MongoStore({
+	  mongooseConnection: db
+	})
+  }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//------------ Connecting flash ------------//
+app.use(flash());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +75,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
 app.use('/index', indexRouter);
 app.use('/products',productRouter)
 // catch 404 and forward to error handler

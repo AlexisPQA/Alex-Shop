@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <title>Signin & Signup</title>
+</head>
+<body>
+  <div class="container {{class}}">
+      <div class="forms-container">
+        <div class="signin-signup">
+            <form action="/login/signin" class="sign-in-form" method= "post">
+                <h1 class="title">Sign in</h1>
+                <h3 style="color: green;">{{error_msg}}</h3>
+                <h3 style="color: green;">{{success_msg}}</h3>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="email" placeholder="Username" required="">
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required="">
+                </div>
+                <input type="submit" value="Login" class="btn solid" >
+                <p class="social-text">Or Sign in with social platforms</p>
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-google"></i>
+                    </a>
+                </div>
+            </form>
+
+            <form id="signup" action="/login/signup" method="post" class="sign-up-form" onsubmit="event.preventDefault(); validateMyForm();">
+                <h1 class="title">Sign up</h1>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="name" placeholder="Username" required="" value={{name}}>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" name="email" placeholder="Email" required="" value={{email}}>
+                </div>
+                <p class="error">{{erroremail}}</p>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" id="password" placeholder="Password" required=""value={{password}}>
+                </div>
+                <p class="error">{{errorpassword}}</p>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password2" id="password_conf" placeholder="Confirm Password " required=""value={{password2}}>
+                </div>
+                <p class="error">{{errorpassword2}}</p>
+                <input type="submit" value="Sign Up" class="btn solid" >
+                <p class="social-text">Or Sign in with social platforms</p>
+                <div class="social-media">
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <i class="fab fa-google"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+      </div>
+      <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>New here?</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nobis libero ipsam?</p>
+                <button class="btn transparent" id="sign-up-btn">Sign up</button>
+            </div>
+            <img src="../images/rocket.svg" alt="" class ="image">
+        </div>
+
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>One of us?</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis nobis libero ipsam?</p>
+                <button class="btn transparent" id="sign-in-btn">Sign in</button>
+            </div>
+            <img src="../images/cart.svg" alt="" class ="image">
+        </div>
+      </div>
+  </div>
+  <script src="../javascripts/animation.js"></script>
+ <script src="../javascripts/register.js"></script>
+</body>
+</html>
+
