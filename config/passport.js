@@ -14,7 +14,9 @@ module.exports = function (passport) {
                 if (!user) {
                     return done(null, false, { message: 'This email ID is not registered' });
                 }
-
+                if (user.blocked == true){
+                    return done(null, false, { message: 'This account has been blocked' });
+                }
                 //------------ Password Matching ------------//
                 bcrypt.compare(password, user.password, (err, isMatch) => {
                     if (err) throw err;
