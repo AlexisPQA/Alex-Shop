@@ -16,7 +16,7 @@ const hbshelper = require('handlebars-helpers')
 const multihelpers = hbshelper()
 
 
-mongoose.connect(process.env.url, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.url, {useCreateIndex: true,useNewUrlParser: true, useUnifiedTopology: true})
 var db = mongoose.connection;
 
 require('./config/passport')(passport);
