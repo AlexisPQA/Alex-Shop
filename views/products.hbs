@@ -5,13 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Favicon -->
-  <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
   
 
   <!-- Custom StyleSheet -->
-  <link rel="stylesheet" href="../stylesheets/styles.css" />
+  <link rel="stylesheet" href="../../stylesheets/styles.css" />
   <title>Codevo - Ecommerce Website</title>
 </head>
 
@@ -35,7 +35,7 @@
           <div class="mega-box">
             <div class="content">
               <div class="row">
-                <img src="./images/woman.jpg" alt="" />
+                <img src="../../images/woman.jpg" alt="" />
               </div>
               <div class="row">
                 <header>Shop Layout</header>
@@ -91,11 +91,13 @@
         </li>
         <!-- icons -->
         <li class="icons">
-          <span>
-            <img src="./images/shoppingBag.svg" alt="" />
-            <small class="count d-flex">0</small>
-          </span>
-          <span><img src="./images/search.svg" alt="" /></span>
+          <a href="/cart">
+            <span>
+              <img src="../../images/shoppingBag.svg" alt="" />
+              <small class="count d-flex">0</small>
+            </span>
+          </a>
+          <span><img src="../../images/search.svg" alt="" /></span>
         </li>
       </ul>
       <label for="" class="btn open-btn"><i class="fas fa-bars"></i></label>
@@ -198,20 +200,20 @@
         </div>
       </div>
       <div class="col-3-of-4">
-        <form action='/products/' method = 'GET'>
+        <form action='' method = 'GET'>
           <div class="item">
             <label for="sort">Sort By</label>
             <select name="sort" id="sort">
-              <option value="title" selected="selected">Name</option>
-              <option value="basePrice">Price</option>
-              <option value="views">Views</option>
+              <option value="title"  >Name</option>
+              <option value="basePrice" selected="">Price</option>
+              <option value="views" >Views</option>
             </select>
           </div>
           <div class="item">
             <label for="order">Order</label>
             <select name="order" id="sort">
-              <option value="ASC" selected="selected">ASC</option>
-              <option value="DESC">DESC</option>
+              <option value= "ASC" selected="">Tăng Dần</option>
+              <option value= "DESC" >Giảm Dần</option>
             </select>
           </div>
           {{!-- <a href="">Apply</a> --}}
@@ -244,6 +246,27 @@
         </div>
 
         <!-- PAGINATION -->
+        {{#isnt filterd false}}
+        <ul class="pagination">
+          <span class="last"><a href="/products/book{{url}}&page=1">First « </a></span>
+          {{#isnt currentPage 1}}
+          <span class="icon"><a href="/products/book{{url}}&page={{prevPage}}">«</a></span>
+          {{/isnt}}
+          {{#if hasPreviousPage}}
+          <span><a href="/products/book{{url}}&page={{prevPage}}">{{prevPage}}</a></span>
+          {{/if}}
+          <span class ="active"><a href="/products/book{{url}}&page={{currentPage}}">{{currentPage}}</a></span>
+          {{#if hasNextPage}}
+          <span><a href="/products/book{{url}}&page={{nextPage}}">{{nextPage}}</a></span>
+          {{/if}}
+          {{#gt lastPage currentPage}}
+          <span class="icon"><a href="/products/book{{url}}&page={{nextPage}}">»</a></span>
+          {{/gt}}
+          <span class="last"><a href="/products/book{{url}}&page={{lastPage}}">Last »</a></span>
+        </ul>
+        {{/isnt}}
+
+        {{#isnt filterd true}}
         <ul class="pagination">
           <span class="last"><a href="/products/book?page=1">First « </a></span>
           {{#isnt currentPage 1}}
@@ -261,6 +284,7 @@
           {{/gt}}
           <span class="last"><a href="/products/book?page={{lastPage}}">Last »</a></span>
         </ul>
+        {{/isnt}}
       </div>
     </div>
   </section>
@@ -314,7 +338,7 @@
             456-456-4512
           </div>
           <div class="payment-methods">
-            <img src="./images/payment.png" alt="">
+            <img src="../../images/payment.png" alt="">
           </div>
         </div>
       </div>
@@ -324,9 +348,9 @@
   <!-- End Footer -->
 
   <!-- Custom Scripts -->
-  <script src="javascripts/products.js"></script>
-  <script src="javascripts/slider.js"></script>
-  <script src="javascripts/index.js"></script>
+  <script src="../../javascripts/products.js"></script>
+  <script src="../../javascripts/slider.js"></script>
+  <script src="../../javascripts/index.js"></script>
 </body>
 
 </html>
