@@ -4,19 +4,78 @@ var ObjectID = require('mongodb').ObjectID;
 ItemPerPage = 9
 
 exports.index = async (req, res, next) => {
-	console.log(req.query)
-	const filter = req.query.sort;
+	var url = req.url
+	url = url.split("&page")[0]
+	url = '/?'+ url.split("?")[1]
+	console.log("URL:",url)
+	const sortby = req.query.sort;
 	const orderby = req.query.order;
-	var option = {
-		sort:{
-			'title': -1
-		}
-	};
 	const page = +req.query.page || 1;
-	const paginate = await books.paginate({},option,{
-		page:page,
-		limit:ItemPerPage,
-	});
+	var filter = false;
+	if(typeof(sortby)!='undefined'){
+		filter = true
+	}
+	if (sortby == "title"){
+		if (orderby == 'ASC'){
+			option = {
+				sort:{
+					'title': 1
+				},
+				page:page,
+				limit:ItemPerPage,
+			}
+		}
+		else{
+			option = {
+				sort:{
+					'title': -1
+				},
+				page:page,
+				limit:ItemPerPage,
+			}
+		}
+	}else if (sortby == "basePrice"){
+		if (orderby == 'ASC'){
+			option = {
+				sort:{
+					'basePrice': 1
+				},
+				page:page,
+				limit:ItemPerPage,
+			}
+		}
+		else{
+			option = {
+				sort:{
+					'basePrice': -1
+				},
+				page:page,
+				limit:ItemPerPage,
+			}
+		}
+	}
+	else{
+		if (orderby == 'ASC'){
+			option = {
+				sort:{
+					'views': 1
+				},
+				page:page,
+				limit:ItemPerPage,
+			}
+		}
+		else{
+			option = {
+				sort:{
+					'views': -1
+				},
+				page:page,
+				limit:ItemPerPage,
+			}
+		}
+	}
+	console.log("Filter: ",filter)
+	const paginate = await books.paginate({},option);
 	await categories.find().then(function(category){
 		res.render('products',{
 			book: paginate.docs,
@@ -27,7 +86,9 @@ exports.index = async (req, res, next) => {
 			prevPage : paginate.prevPage,
 			lastPage : paginate.totalPages,
 			ITEM_PER_PAGE: ItemPerPage,
-			category : category
+			category : category,
+			filterd: filter,
+			url :url
 		})
 	})	
 };
