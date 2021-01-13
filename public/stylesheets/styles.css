@@ -1220,6 +1220,20 @@ th:last-child {
   transition: all 300ms ease-in-out;
 }
 
+.col-3-of-4 form .Filter {
+  display: inline-block;
+  padding: 1rem 3rem;
+  border-radius: 4rem;
+  margin-right: 1rem;
+  background-color: var(--primary);
+  color: var(--white);
+  transition: all 300ms ease-in-out;
+}
+
+.col-3-of-4 form .Filter:hover {
+  background-color: var(--black);
+}
+
 .col-3-of-4 form a:hover {
   background-color: var(--black);
 }
