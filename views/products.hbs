@@ -198,24 +198,24 @@
         </div>
       </div>
       <div class="col-3-of-4">
-        <form action="">
+        <form action='/products/' method = 'GET'>
           <div class="item">
-            <label for="sort-by">Sort By</label>
-            <select name="sort-by" id="sort-by">
+            <label for="sort">Sort By</label>
+            <select name="sort" id="sort">
               <option value="title" selected="selected">Name</option>
-              <option value="number">Price</option>
-              <option value="search_api_relevance">Relevance</option>
-              <option value="created">Newness</option>
+              <option value="basePrice">Price</option>
+              <option value="views">Views</option>
             </select>
           </div>
           <div class="item">
-            <label for="order-by">Order</label>
-            <select name="order-by" id="sort-by">
+            <label for="order">Order</label>
+            <select name="order" id="sort">
               <option value="ASC" selected="selected">ASC</option>
               <option value="DESC">DESC</option>
             </select>
           </div>
-          <a href="">Apply</a>
+          {{!-- <a href="">Apply</a> --}}
+          <input type="submit" value="Apply" class="Filter" >
         </form>
 
         <div class="product-layout">

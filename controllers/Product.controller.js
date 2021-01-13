@@ -4,8 +4,16 @@ var ObjectID = require('mongodb').ObjectID;
 ItemPerPage = 9
 
 exports.index = async (req, res, next) => {
+	console.log(req.query)
+	const filter = req.query.sort;
+	const orderby = req.query.order;
+	var option = {
+		sort:{
+			'title': -1
+		}
+	};
 	const page = +req.query.page || 1;
-	const paginate = await books.paginate({},{
+	const paginate = await books.paginate({},option,{
 		page:page,
 		limit:ItemPerPage,
 	});
