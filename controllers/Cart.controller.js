@@ -30,7 +30,6 @@ exports.RemoveProduct = (req,res) =>{
     var cart = new Cart(req.session.cart)
     cart.remove(id)
     req.session.cart = cart
-    console.log("cart after remove:",req.session.cart)
     res.redirect('/cart')
 }
 
