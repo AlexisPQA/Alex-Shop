@@ -37,4 +37,6 @@ exports.RemoveProduct = (req,res) =>{
 exports.update = (req,res) =>{
     var cart = new Cart(req.session.cart ? req.session.cart : {})
     cart.update(req.body,req.body['id'])
+    req.session.cart = cart
+    console.log(cart)
 }

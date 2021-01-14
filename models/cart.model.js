@@ -32,8 +32,9 @@ module.exports =function Cart(oldCart){
         var updateItem = this.items[id]
         updateItem.Quantity = Data[id].quantity;
         updateItem.Price = Data[id].subprice;
-        this.totalPrice = Data[totalPrice]
-        this.totalQuantity = Data[totalQuantity]
+        this.totalPrice = Data['totalPrice']
+        this.totalQuantity = Data['totalQuantity']
+        console.log(this.totalQuantity)
     }
 
 
