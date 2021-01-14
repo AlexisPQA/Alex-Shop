@@ -4,6 +4,14 @@ var ObjectID = require('mongodb').ObjectID;
 ItemPerPage = 9
 
 exports.index = async (req, res, next) => {
+	const cart = req.session.cart
+	var totalQuantity =0
+	if(cart){
+		totalQuantity = cart.totalQuantity
+	}
+	else{
+		console.log("Không Tồn tại cart")
+	}
 	var url = req.url
 	url = url.split("&page")[0]
 	url = '/?'+ url.split("?")[1]
@@ -88,13 +96,22 @@ exports.index = async (req, res, next) => {
 			ITEM_PER_PAGE: ItemPerPage,
 			category : category,
 			filterd: filter,
-			url :url
+			url :url,
+			totalQuantity: totalQuantity
 		})
 	})	
 };
 
 exports.detail =  (req,res,next) => {
 	const id = req.params.id
+	const cart = req.session.cart
+	var totalQuantity =0
+	if(cart){
+		totalQuantity = cart.totalQuantity
+	}
+	else{
+		console.log("Không Tồn tại cart")
+	}
 	books.findById(id, function (err, book) {
 		if (err){
 			console.log('error')
@@ -109,7 +126,9 @@ exports.detail =  (req,res,next) => {
 			);
 			book.views = views
 			console.log(book.views)
-			res.render('productDetails', {book:book});
+			res.render('productDetails', {book:book,
+				totalQuantity: totalQuantity
+			});
 		}
 	});
 }

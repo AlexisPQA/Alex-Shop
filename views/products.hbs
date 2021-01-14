@@ -67,7 +67,7 @@
             </div>
           </div>
         </li>
-        <li><a href="">Blog</a></li>
+
         <li>
           <a href="" class="desktop-item">Vendors <span><i class="fas fa-chevron-down"></i></span></a>
           <input type="checkbox" id="showdrop1" />
@@ -90,11 +90,12 @@
           </ul>
         </li>
         <!-- icons -->
+        <li><a href="/login">Login</a></li>
         <li class="icons">
           <a href="/cart">
             <span>
               <img src="../../images/shoppingBag.svg" alt="" />
-              <small class="count d-flex">0</small>
+              <small class="count d-flex">{{totalQuantity}}</small>
             </span>
           </a>
           <span><img src="../../images/search.svg" alt="" /></span>
@@ -225,10 +226,10 @@
           <div class="product">
             <div class="img-container">
               <img src="{{cover}}" alt="" />
-              <div class="addCart">
+              <a href="/cart/add-to-cart/{{id}}"><div class="addCart">
                 <i class="fas fa-shopping-cart"></i>
               </div>
-
+              </a>
               <ul class="side-icons">
                 <span><i class="fas fa-search"></i></span>
                 <span><i class="far fa-heart"></i></span>

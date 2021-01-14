@@ -31,6 +31,8 @@ db.once('open', function () {
 var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product')
 var loginRouter = require('./routes/login')
+var cartRouter = require('./routes/cart')
+
 
 var app = express();
 
@@ -78,6 +80,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/index', indexRouter);
 app.use('/products',productRouter)
+app.use('/cart', cartRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
