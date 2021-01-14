@@ -95,7 +95,7 @@
           <a href="/cart">
             <span>
               <img src="../../images/shoppingBag.svg" alt="" />
-              <small class="count d-flex">{{totalQuantity}}</small>
+              <small id ="Count" class="count d-flex">{{totalQuantity}}</small>
             </span>
           </a>
           <span><img src="../../images/search.svg" alt="" /></span>
@@ -142,7 +142,7 @@
               </label>
             </li>
 
-            <li>
+            {{!-- <li>
               <input type="checkbox" name="" id="">
               <label for="">
                 <span>Burberry</span>
@@ -196,7 +196,7 @@
                 <span>Givenchy</span>
                 <small>(3)</small>
               </label>
-            </li>
+            </li> --}}
           </ul>
         </div>
       </div>
@@ -226,10 +226,9 @@
           <div class="product">
             <div class="img-container">
               <img src="{{cover}}" alt="" />
-              <a href="/cart/add-to-cart/{{id}}"><div class="addCart">
-                <i class="fas fa-shopping-cart"></i>
+              <div class="addCart">
+                <i id ="{{id}}" class="fas fa-shopping-cart" onclick = "addToCart(this.id)"></i>
               </div>
-              </a>
               <ul class="side-icons">
                 <span><i class="fas fa-search"></i></span>
                 <span><i class="far fa-heart"></i></span>
@@ -237,7 +236,7 @@
               </ul>
             </div>
             <div class="bottom">
-              <a href=/products/book/{{id}}>{{title}}</a>
+              <a href='/products/book/{{id}}'>{{title}}</a>
               <div class="price">
                 <span>{{basePrice}}</span>
               </div>
@@ -349,6 +348,7 @@
   <!-- End Footer -->
 
   <!-- Custom Scripts -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../../javascripts/products.js"></script>
   <script src="../../javascripts/slider.js"></script>
   <script src="../../javascripts/index.js"></script>

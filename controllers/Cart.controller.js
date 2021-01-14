@@ -20,8 +20,8 @@ exports.AddProduct = (req,res)=>{
         }
         cart.add(book,book.id)
         req.session.cart = cart
-        console.log(req.session.cart)
-        res.redirect('/products')
+        // console.log(req.session.cart)
+        // res.redirect('/products')
     })
 }
 
