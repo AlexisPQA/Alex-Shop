@@ -3,8 +3,9 @@ var router = express.Router();
 
 var User = require('../models/user.model');
 const authController = require('../controllers/Auth.controller')
+const checkAuth = require('../config/checkAuth')
 
-router.get('/', function(req, res, next) {
+router.get('/', checkAuth.forwardAuthenticated, function(req, res, next) {
     res.render('Login',{error_msg:req.flash('error'),success_msg:req.flash('success_msg')});
   });
   

@@ -69,7 +69,7 @@
           </div>
         </li>
         
-        <li>
+        {{!-- <li>
           <a href="" class="desktop-item">Vendors <span><i class="fas fa-chevron-down"></i></span></a>
           <input type="checkbox" id="showdrop1" />
           <label for="showdrop1" class="mobile-item">Vendors <span><i class="fas fa-chevron-down"></i></span></label>
@@ -77,20 +77,22 @@
             <li><a href="">Vendor Store listings</a></li>
             <li><a href="">Store Details</a></li>
           </ul>
-        </li>
+        </li> --}}
 
         <li>
-          <a href="" class="desktop-item">Page <span><i class="fas fa-chevron-down"></i></span></a>
+          <a href="" class="desktop-item">User <span><i class="fas fa-chevron-down"></i></span></a>
           <input type="checkbox" id="showdrop2" />
           <label for="showdrop2" class="mobile-item">Page <span><i class="fas fa-chevron-down"></i></span></label>
           <ul class="drop-menu2">
-            <li><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="">Faq</a></li>
-            <li><a href="">Page 404</a></li>
+            {{#if login}} 
+              <li><a href="/profile">User Management</a></li>
+              <li><a href="/login/logout">Logout</a></li>
+            {{else}}
+              <li><a href="/login/">Login</a></li>
+            {{/if}}
           </ul>
         </li>
-        <li><a href="/login">Login</a></li>
+        {{!-- <li><a href="/login">Login</a></li> --}}
         <!-- icons -->
         <li class="icons">
           <a href="/cart">
@@ -99,7 +101,7 @@
               <small class="count d-flex">{{totalQuantity}}</small>
             </span>
           </a>
-          <span><img src="./images/search.svg" alt="" /></span>
+          {{!-- <span><img src="./images/search.svg" alt="" /></span> --}}
         </li>
       </ul>
       <label for="" class="btn open-btn"><i class="fas fa-bars"></i></label>

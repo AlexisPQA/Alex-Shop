@@ -32,7 +32,7 @@ var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product')
 var loginRouter = require('./routes/login')
 var cartRouter = require('./routes/cart')
-
+var profileRouter = require('./routes/profile')
 
 var app = express();
 
@@ -50,6 +50,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 //------------ Connecting flash ------------//
 app.use(flash());
@@ -76,11 +78,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req,res,next){
+	res.locals.login = req.isAuthenticated();
+	next();
+})
+
+
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/index', indexRouter);
 app.use('/products',productRouter)
 app.use('/cart', cartRouter);
+app.use('/profile', profileRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
