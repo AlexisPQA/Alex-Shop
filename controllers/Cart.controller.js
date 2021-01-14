@@ -3,7 +3,7 @@ const books = require('../models/book.model');
 
 exports.index = (req,res) =>{
     console.log(req.session.cart)
-    var cart = new Cart(req.session.cart)
+    var cart = new Cart(req.session.cart ? req.session.cart : {})
     res.render('cart',{
         cart : cart.generateArr(),
         totalPrice : cart.totalPrice,
