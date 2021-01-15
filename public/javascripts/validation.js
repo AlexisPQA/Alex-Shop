@@ -1,11 +1,12 @@
+var length = false;
+var uppercase = false;
+var lowercase = false;
+var number = false;
 $("input[type=password]").keyup(function(){
     var ucase = new RegExp("[A-Z]+");
 	var lcase = new RegExp("[a-z]+");
 	var num = new RegExp("[0-9]+");
-	var length = false;
-	var uppercase = false;
-	var lowercase = false;
-	var number = false;
+	
 
 	if($("#password1").val().length >= 8){
 		$("#8char").removeClass("glyphicon-remove");
@@ -70,11 +71,15 @@ function validateMyForm(){
 		alert("Passwords do not match. Please try again.");
 		
     } else {
-		// if (length ===false || number ===false|| uppercase === false || lowercase === false){
-		// 	alert("Your password must meet the requirements.");
-		// }else{
-		// 	form.submit()
-		// }
-        form.submit()
+		if (length ==false || number ==false|| uppercase == false || lowercase == false){
+			alert("Your password must meet the requirements.");
+			console.log ("length",length)
+			console.log ("number",number)
+			console.log ("uppercase",uppercase)
+			console.log ("lowercase",lowercase)
+		}else{
+			form.submit()
+		}
+        //form.submit()
     }
 }
