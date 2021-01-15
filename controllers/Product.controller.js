@@ -5,6 +5,7 @@ ItemPerPage = 9
 
 exports.index = async (req, res, next) => {
 	const cart = req.session.cart
+	const name = req.session.name
 	var totalQuantity =0
 	if(cart){
 		totalQuantity = cart.totalQuantity
@@ -97,7 +98,8 @@ exports.index = async (req, res, next) => {
 			category : category,
 			filterd: filter,
 			url :url,
-			totalQuantity: totalQuantity
+			totalQuantity: totalQuantity,
+			name: name
 		})
 	})	
 };
@@ -105,6 +107,7 @@ exports.index = async (req, res, next) => {
 exports.detail =  (req,res,next) => {
 	const id = req.params.id
 	const cart = req.session.cart
+	const name = req.session.name
 	var totalQuantity =0
 	if(cart){
 		totalQuantity = cart.totalQuantity
@@ -127,7 +130,8 @@ exports.detail =  (req,res,next) => {
 			book.views = views
 			console.log(book.views)
 			res.render('productDetails', {book:book,
-				totalQuantity: totalQuantity
+				totalQuantity: totalQuantity,
+				name:name
 			});
 		}
 	});

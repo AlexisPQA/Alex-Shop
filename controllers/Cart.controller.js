@@ -1,20 +1,25 @@
 var Cart = require('../models/cart.model');
 const books = require('../models/book.model');
-
+const user = require('../models/user.model')
 exports.index = (req,res) =>{
     console.log(req.session.cart)
     var cart = new Cart(req.session.cart ? req.session.cart : {})
+    var userName ="User"
     res.render('cart',{
         cart : cart.generateArr(),
         totalPrice : cart.totalPrice,
-        totalQuantity: cart.totalQuantity
+        totalQuantity: cart.totalQuantity,
+        name: req.session.name
     })
+    
 }
 
 exports.AddProduct = (req,res)=>{
 
     const id = req.params.id
+    
     var cart = new Cart(req.session.cart ? req.session.cart : {})
+    
     books.findById(id, function(err,book){
         if(err){
             res.redirect('/')
@@ -42,4 +47,47 @@ exports.update = (req,res) =>{
     req.session.cart = cart
     console.log(cart)
     res.end('OK')
+}
+
+exports.purchase = (req,res) =>{
+    var cart = new Cart(req.session.cart ? req.session.cart : {})
+    user.updateOne(
+                    {"email": req.session.email}, 
+                    { $push: { "history": cart } }, 
+                    function(err, doc) {
+                        if(err){
+                            console.log(err)
+                        }
+                        else{
+                            console.log("Update succseed")
+                            // res.end("OK")
+                            res.redirect('/cart/buyed')
+                        }
+                    }
+                );
+}
+
+exports.buyed =(req,res) =>{
+    user.findOne({"email":req.session.email},
+        function (err,user){
+            if(err){
+                console.log(Err)
+            }else{
+                history = user.history
+                var cart = []
+                for (item of history){
+                    
+                    cart.push(new Cart(item))
+                }
+                item = cart[0]
+                res.render('buyed',{
+                            cart : item.generateArr(),
+                            totalQuantity: item.totalQuantity,
+                            datebuy: item.datebuy,
+                            name: user.name
+                        })
+            }
+        }
+    )
+    
 }

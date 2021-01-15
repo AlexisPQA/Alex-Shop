@@ -5,6 +5,7 @@ module.exports = {
             return next();
         }
         req.flash('error_msg', 'Please log in first!');
+        console.log("Please log in first!")
         res.redirect('/login');
     },
     forwardAuthenticated: function (req, res, next) {

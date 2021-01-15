@@ -29,7 +29,7 @@
         </div>
         <li><a href="/index">Home</a></li>
         <li><a href="/products">Products</a></li>
-        <li>
+        {{!-- <li>
           <a href="" class="desktop-item">Shop <span><i class="fas fa-chevron-down"></i></span></a>
           <input type="checkbox" id="showMega" />
           <label for="showMega" class="mobile-item">Shop <span><i class="fas fa-chevron-down"></i></span></label>
@@ -67,7 +67,7 @@
               </div>
             </div>
           </div>
-        </li>
+        </li> --}}
         
         {{!-- <li>
           <a href="" class="desktop-item">Vendors <span><i class="fas fa-chevron-down"></i></span></a>
@@ -80,13 +80,18 @@
         </li> --}}
 
         <li>
-          <a href="" class="desktop-item">User <span><i class="fas fa-chevron-down"></i></span></a>
+          {{#if login}} 
+            <a href="" class="desktop-item">{{name}} <span><i class="fas fa-chevron-down"></i></span></a>
+          {{else}}
+            <a href="" class="desktop-item">User<span><i class="fas fa-chevron-down"></i></span></a>
+          {{/if}}
           <input type="checkbox" id="showdrop2" />
           <label for="showdrop2" class="mobile-item">Page <span><i class="fas fa-chevron-down"></i></span></label>
           <ul class="drop-menu2">
             {{#if login}} 
               <li><a href="/profile">User Management</a></li>
               <li><a href="/login/logout">Logout</a></li>
+              <li><a href="/cart/buyed">Purchase History</a></li>
             {{else}}
               <li><a href="/login/">Login</a></li>
             {{/if}}

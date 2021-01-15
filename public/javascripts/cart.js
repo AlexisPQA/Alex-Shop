@@ -19,6 +19,7 @@ function changeQuantity(id) {
     for (val of allQty){
         totalQty.innerHTML = parseInt(val.value)+parseInt(totalQty.innerHTML)
     }
+    console.log(totalPrice)
     var count = document.getElementById('Count')
     count.innerHTML = totalQty.innerHTML
     subprice =subprice.innerHTML

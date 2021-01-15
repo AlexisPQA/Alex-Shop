@@ -79,7 +79,7 @@
 
         <li>
           {{#if login}} 
-            <a href="" class="desktop-item">{{name}}<span><i class="fas fa-chevron-down"></i></span></a>
+            <a href="" class="desktop-item">{{name}} <span><i class="fas fa-chevron-down"></i></span></a>
           {{else}}
             <a href="" class="desktop-item">User<span><i class="fas fa-chevron-down"></i></span></a>
           {{/if}}
@@ -116,7 +116,8 @@
       
       <table>
         <tr>
-          <th>Product</th>
+          <th>Your Buyed Product</th>
+          <th>Date</th>
           <th>Quantity</th>
           <th>Subtotal</th>
         </tr>
@@ -129,33 +130,15 @@
                 <p>{{this.item.title}}</p>
                 <span id="{{this.item._id}}price">Price: {{this.item.basePrice}}</span>
                 <br />
-                <a href="/cart/remove-from-cart/{{this.item._id}}">Remove</a>
               </div>
             </div>
           </td>
-          <td><input class ="Qty" id ={{this.item._id}} type="number" value= {{Quantity}} min="1" onchange="changeQuantity(this.id)" /></td>
+          <td>{{../datebuy}}</td>
+          <td><p class ="Qty" >{{Quantity}}</p></td>
           <td class ="subPrice" id="{{this.item._id}}subprice">{{Price}}</td>
         </tr>
         {{/each}}
       </table>
-
-      <div class="total-price">
-        <table>
-          {{!-- <tr>
-            <td>Subtotal</td>
-            <td>$200</td>
-          </tr> --}}
-          <tr>
-            <td>Quantity</td>
-            <td id ="totalQty">{{totalQuantity}}</td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td id ="totalPrice">{{totalPrice}}</td>
-          </tr>
-        </table>
-        <a href="/cart/purchase"  class="checkout btn">Purchase</a>
-      </div>
       <h1 id ="error" style="color: red;">{{error}}</h1>
       
     </div>

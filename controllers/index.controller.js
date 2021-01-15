@@ -7,6 +7,14 @@ exports.index =(req,res) =>{
     if (cart){
         totalQuantity = cart.totalQuantity
     }
-    res.render('index',{totalQuantity:totalQuantity})
+    user.findOne({"email":req.session.email},function(err,userLogged){
+        if(err){
+            console.log(err)
+        }else{
+            req.session.name = userLogged.name
+            res.render('index',{totalQuantity:totalQuantity,name:userLogged.name})
+        }
+    })
+    
     
 }

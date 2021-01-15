@@ -2,7 +2,7 @@ module.exports =function Cart(oldCart){
     this.items = oldCart.items || {};
     this.totalQuantity = oldCart.totalQuantity || 0;
     this.totalPrice = oldCart.totalPrice || 0;
-
+    this.datebuy = new Date().toDateString()
     this.add = function(item, id){
         var storedItem = this.items[id];
         if (!storedItem){
@@ -25,7 +25,7 @@ module.exports =function Cart(oldCart){
         for (var id in this.items){
             arr.push(this.items[id])
         }
-        return arr;
+        return arr
     }
 
     this.update = function(Data,id){
