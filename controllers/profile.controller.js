@@ -33,3 +33,16 @@ exports.updateuser = async(req,res,next) => {
         });
     });
 }
+
+exports.edit = (req,res)=>{
+    user.findOne({
+        email: req.session.email
+    }).then(user => {
+        if(user){
+            res.render('editprofile',{avatar: user.avatar,name:user.name, email:user.email})
+        }
+        else{
+            res.redirect('/')
+        }
+    });
+}

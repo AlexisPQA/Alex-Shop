@@ -5,4 +5,5 @@ const checkAuth = require('../config/checkAuth')
 
 router.get('/', checkAuth.ensureAuthenticated,profileController.index)
 router.post('/', profileController.updateuser);
+router.get('/edit',profileController.edit)
 module.exports = router;
