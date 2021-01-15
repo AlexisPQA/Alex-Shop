@@ -42,5 +42,7 @@ router.get('/', checkAuth.forwardAuthenticated, function(req, res, next) {
   
   //------------ Logout GET Handle ------------//
   router.get('/logout', authController.logoutHandle);
+
+  router.post('checkcurrentpw',authController.checkcurrentpw)
   
 module.exports = router;

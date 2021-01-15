@@ -396,40 +396,80 @@ exports.logoutHandle = (req, res) => {
 }
 
 exports.changepasswordindex = (req,res) =>{
-    res.render('changepassword')
+    res.render('changepassword',{error_msg:req.flash('error')});
 }
 
 exports.changepassword = (req,res)=>{
     console.log(req.body.password1)
+    var currentpassword = req.body.password
     var newPassword = req.body.password1
     var newPasswordConf = req.body.password2
+    var match = false
     if (newPassword!= newPasswordConf){
-        res.flash('error_msg','Passwords do not match. Please try again.')
+        res.flash('error','Passwords do not match. Please try again.')
     }
     else{
-        bcryptjs.genSalt(10, (err, salt) => {
-            bcryptjs.hash(newPasswordConf, salt, (err, hash) => {
+        User.findOne({
+            'email': req.session.email
+        }).then(user => {
+            //------------ Password Matching ------------//
+            bcryptjs.compare(currentpassword, user.password, (err, isMatch) => {
                 if (err) throw err;
-                newPasswordConf = hash;
-                User.updateOne({'email':req.session.email},
-                    {$set : {'password': newPasswordConf}},function(err,doc){
-                        if(err){
-                            console.log(err)
-
-                        }
-                        else{
-                            req.logout()
-                            req.flash(
-                                'success_msg',
-                                'Password changed. You can now log in.'
-                            );
-                            res.redirect('/login')
-                        }
-                    }
-                )
+                if (isMatch) {
+                    match =true
+                    return done(null, false, { message: 'Password matched' });
+                } else {
+                    req.flash(
+                        'error',
+                        'Mật khẩu hiện tại không đúng.'
+                    );
+                    res.redirect('/login/changepassword')
+                }
             });
         });
+        if (match){
+            bcryptjs.genSalt(10, (err, salt) => {
+                bcryptjs.hash(newPasswordConf, salt, (err, hash) => {
+                    if (err) throw err;
+                    newPasswordConf = hash;
+                    User.updateOne({'email':req.session.email},
+                        {$set : {'password': newPasswordConf}},function(err,doc){
+                            if(err){
+                                console.log(err)
+    
+                            }
+                            else{
+                                req.logout()
+                                req.flash(
+                                    'success_msg',
+                                    'Password changed. You can now log in.'
+                                );
+                                res.redirect('/login')
+                            }
+                        }
+                    )
+                });
+            });
+        }
+        
         
     }
+    
+}
+exports.checkcurrentpw = (req,res)=>{
+    User.findOne({
+        'email': req.session.email
+    }).then(user => {
+        //------------ Password Matching ------------//
+        bcrypt.compare(password, user.password, (err, isMatch) => {
+            if (err) throw err;
+            if (isMatch) {
+                return done(null, user);
+            } else {
+                res.end("Not Match")
+                return done(null, false, { message: 'Password incorrect! Please try again.' });
+            }
+        });
+    });
     
 }
