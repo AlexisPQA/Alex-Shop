@@ -29,6 +29,10 @@ const UserSchema = new mongoose.Schema({
   blocked:{
     type:Boolean,
     default:false
+  },
+  history:{
+    type: Object,
+    default: null
   }
 }, { timestamps: true });
 

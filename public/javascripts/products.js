@@ -6,7 +6,7 @@ function addToCart(id){
     count.innerHTML = parseInt(count.innerHTML)+1
     axios.get(url)
       .then(function (response) {
-          
+        
         console.log(response);
       })
       .catch(function (error) {

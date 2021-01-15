@@ -12,6 +12,7 @@ exports.index = (req,res) =>{
 }
 
 exports.AddProduct = (req,res)=>{
+
     const id = req.params.id
     var cart = new Cart(req.session.cart ? req.session.cart : {})
     books.findById(id, function(err,book){
@@ -20,8 +21,10 @@ exports.AddProduct = (req,res)=>{
         }
         cart.add(book,book.id)
         req.session.cart = cart
-        // console.log(req.session.cart)
-        // res.redirect('/products')
+        req.session.save()
+        console.log("add to cart succesed")
+        console.log(req.session.cart)
+        res.end('OK')
     })
 }
 
@@ -38,4 +41,5 @@ exports.update = (req,res) =>{
     cart.update(req.body,req.body['id'])
     req.session.cart = cart
     console.log(cart)
+    res.end('OK')
 }
