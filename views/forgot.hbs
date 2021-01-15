@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-12">
+    <h1>Reset Password</h1>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+    <form id ="changepassword" action="/login/forgot" method="post" ">
+        <input type="text" class="input-lg form-control" name="email" id="email" placeholder="Your Email"  autocomplete="off">
+        <div><p style="color: red;">{{error_msg}}</p></div>
+        <input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" value="Reset Password">
+    </form>
+    </div><!--/col-sm-6-->
+    </div><!--/row-->
+    </div>
+</body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</html>

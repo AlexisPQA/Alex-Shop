@@ -14,7 +14,7 @@ router.get('/', checkAuth.forwardAuthenticated, function(req, res, next) {
   //------------ Reset Password Route ------------//
   router.get('/reset/:id', (req, res) => {
       // console.log(id)
-      res.render('reset', { id: req.params.id })
+      res.render('reset',{ id: req.params.id ,error_msg: req.flash('error')})
   });
   
   //------------ Register POST Handle ------------//
@@ -43,6 +43,6 @@ router.get('/', checkAuth.forwardAuthenticated, function(req, res, next) {
   //------------ Logout GET Handle ------------//
   router.get('/logout', authController.logoutHandle);
 
-  router.post('checkcurrentpw',authController.checkcurrentpw)
+  router.post('/checkcurrentpw',authController.checkcurrentpw)
   
 module.exports = router;

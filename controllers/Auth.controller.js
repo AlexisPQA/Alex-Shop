@@ -189,9 +189,8 @@ exports.forgotPassword = (req, res) => {
     }
 
     if (errors.length > 0) {
-        res.render('forgot', {
-            errors,
-            email
+        res.render('resetpassword', {
+            error_msg: "Please enter an email ID"
         });
     } else {
         User.findOne({ email: email }).then(user => {
@@ -199,8 +198,7 @@ exports.forgotPassword = (req, res) => {
                 //------------ User already exists ------------//
                 errors.push({ msg: 'User with Email ID does not exist!' });
                 res.render('forgot', {
-                    errors,
-                    email
+                    error_msg: "User with Email ID does not exist!"
                 });
             } else {
 
@@ -219,7 +217,7 @@ exports.forgotPassword = (req, res) => {
                 const CLIENT_URL = 'http://' + req.headers.host;
                 const output = `
                 <h2>Please click on below link to reset your account password</h2>
-                <p>${CLIENT_URL}/auth/forgot/${token}</p>
+                <p>${CLIENT_URL}/login/forgot/${token}</p>
                 <p><b>NOTE: </b> The activation link expires in 30 minutes.</p>
                 `;
 
@@ -227,8 +225,7 @@ exports.forgotPassword = (req, res) => {
                     if (err) {
                         errors.push({ msg: 'Error resetting password!' });
                         res.render('forgot', {
-                            errors,
-                            email
+                            error_msg: "Error resetting password!"
                         });
                     }
                     else {
@@ -259,7 +256,7 @@ exports.forgotPassword = (req, res) => {
                                     'error',
                                     'Something went wrong on our end. Please try again later.'
                                 );
-                                res.redirect('/auth/forgot');
+                                res.redirect('/login/forgot');
                             }
                             else {
                                 console.log('Mail sent : %s', info.response);
@@ -267,7 +264,7 @@ exports.forgotPassword = (req, res) => {
                                     'success_msg',
                                     'Password reset link sent to email ID. Please follow the instructions.'
                                 );
-                                res.redirect('/auth/login');
+                                res.redirect('/login');
                             }
                         })
                     }
@@ -302,7 +299,7 @@ exports.gotoReset = (req, res) => {
                         res.redirect('/login');
                     }
                     else {
-                        res.redirect(`/auth/reset/${_id}`)
+                        res.redirect(`/login/reset/${_id}`)
                     }
                 })
             }
@@ -325,7 +322,7 @@ exports.resetPassword = (req, res) => {
             'error',
             'Please enter all fields.'
         );
-        res.redirect(`/auth/reset/${id}`);
+        res.redirect(`/login/reset/${id}`);
     }
 
     //------------ Checking password length ------------//
@@ -334,7 +331,7 @@ exports.resetPassword = (req, res) => {
             'error',
             'Password must be at least 8 characters.'
         );
-        res.redirect(`/auth/reset/${id}`);
+        res.redirect(`/login/reset/${id}`);
     }
 
     //------------ Checking password mismatch ------------//
@@ -343,7 +340,7 @@ exports.resetPassword = (req, res) => {
             'error',
             'Passwords do not match.'
         );
-        res.redirect(`/auth/reset/${id}`);
+        res.redirect(`/login/reset/${id}`);
     }
 
     else {
@@ -361,13 +358,13 @@ exports.resetPassword = (req, res) => {
                                 'error',
                                 'Error resetting password!'
                             );
-                            res.redirect(`/auth/reset/${id}`);
+                            res.redirect(`/login/reset/${id}`);
                         } else {
                             req.flash(
                                 'success_msg',
                                 'Password reset successfully!'
                             );
-                            res.redirect('/auth/login');
+                            res.redirect('/login');
                         }
                     }
                 );
