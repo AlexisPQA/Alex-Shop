@@ -31,6 +31,11 @@ router.get('/', checkAuth.forwardAuthenticated, function(req, res, next) {
   
   //------------ Reset Password Handle ------------//
   router.get('/forgot/:token', authController.gotoReset);
+
+  //------------ Change Password Handle ------------//
+  router.get('/changepassword',checkAuth.ensureAuthenticated, authController.changepasswordindex);
+
+  router.post('/changepassword',checkAuth.ensureAuthenticated, authController.changepassword);
   
   //------------ Login POST Handle ------------//
   router.post('/signin', authController.loginHandle);

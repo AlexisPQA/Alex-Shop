@@ -394,3 +394,42 @@ exports.logoutHandle = (req, res) => {
     req.flash('success_msg', 'You are logged out');
     res.redirect('/login');
 }
+
+exports.changepasswordindex = (req,res) =>{
+    res.render('changepassword')
+}
+
+exports.changepassword = (req,res)=>{
+    console.log(req.body.password1)
+    var newPassword = req.body.password1
+    var newPasswordConf = req.body.password2
+    if (newPassword!= newPasswordConf){
+        res.flash('error_msg','Passwords do not match. Please try again.')
+    }
+    else{
+        bcryptjs.genSalt(10, (err, salt) => {
+            bcryptjs.hash(newPasswordConf, salt, (err, hash) => {
+                if (err) throw err;
+                newPasswordConf = hash;
+                User.updateOne({'email':req.session.email},
+                    {$set : {'password': newPasswordConf}},function(err,doc){
+                        if(err){
+                            console.log(err)
+
+                        }
+                        else{
+                            req.logout()
+                            req.flash(
+                                'success_msg',
+                                'Password changed. You can now log in.'
+                            );
+                            res.redirect('/login')
+                        }
+                    }
+                )
+            });
+        });
+        
+    }
+    
+}

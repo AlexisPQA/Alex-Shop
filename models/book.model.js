@@ -4,7 +4,7 @@ var bookSchema = new moongse.Schema({
     title: String,
     cover: String,
     detail: String,
-    basePrice: String,
+    basePrice: Number,
     category:String,
     author:String,
     views : Number,
