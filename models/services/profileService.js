@@ -16,6 +16,7 @@ exports.putUser = async (user, userEmail, image) => {
         },
         function (error, result) {
             console.log(result)
+            selectedUser.name = user.name;
             selectedUser.avatar = result.url
             selectedUser.save(function (err) {
                 if (err) return handleError(err);
