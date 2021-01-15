@@ -1,5 +1,5 @@
 const user = require('../models/user.model')
-
+const multer = require('multer')
 exports.index = (req,res) =>{
     user.findOne({
         email: req.session.email
